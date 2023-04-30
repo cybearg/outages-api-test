@@ -1,8 +1,9 @@
 import SiteOutage from "src/models/SiteOutage";
+import ApiClient from "src/models/ApiClient";
 
 class OutageController{
-    getOutages():SiteOutage[]{
-        return [];
+    getOutages(client:ApiClient):SiteOutage[]{
+        return client.getOutages();
     }
 }
 

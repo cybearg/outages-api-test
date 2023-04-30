@@ -13,7 +13,7 @@ app.get('/', (req: Request, res: Response) => {
 
 app.get('/outages', async (req: Request, res: Response) => {
   const result = await outageController.getOutages(getApiClient());
-  res.send(result);
+  res.json(result);
 });
 
 export default app;

@@ -1,5 +1,4 @@
-import OutageController from "../src/controllers/outageController";
-import { readFileSync } from "fs";
+import OutageController from "../src/controllers/OutageController";
 import SiteOutage from "../src/models/SiteOutage"
 import TestApiClient from "./testApiClient"
 

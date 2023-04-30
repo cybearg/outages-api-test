@@ -3,7 +3,10 @@ import ApiClient from "src/models/ApiClient";
 
 class OutageController{
     async getOutages(client:ApiClient):Promise<SiteOutage[]>{
-        return await client.getOutages();
+        
+        const result = await client.getOutages();
+        console.log("results" + result);
+        return result;
     }
 }
 

@@ -1,7 +1,12 @@
 import request from "supertest"
 import app from "../src/app"
-import { readFileSync } from "fs"
+import SiteOutage from "../src/models/SiteOutage";
+import { getApiClient } from "../src/services/service-injection";
+import TestApiClient from "./testApiClient";
 
+jest.mock("../src/services/service-injection", () => ({
+	getApiClient: () => new TestApiClient()
+}));
 
 
 describe("GET /", () => {
@@ -13,9 +18,11 @@ describe("GET /", () => {
 
 describe("GET /outages", () => {
 
-    let outagesFixture: [any];
-    beforeAll(() => {
-        outagesFixture = JSON.parse(readFileSync("./test/fixtures/siteOutages.json", "utf-8"));
+    const testApiClient:TestApiClient = new TestApiClient();
+    let outagesFixtures:SiteOutage[];
+    
+    beforeAll(async () => {
+        outagesFixtures = await testApiClient.getOutages();
     })
 
     it("should return OK", async () => {
@@ -24,7 +31,7 @@ describe("GET /outages", () => {
             .set('Accept', 'application/json');
         expect(response.headers["content-type"]).toMatch(/json/);
         expect(response.status).toEqual(200);
-        // expect(response.body).toEqual(outagesFixture);
+        // expect(response.body).toEqual(outagesFixtures);
             
     })
 });

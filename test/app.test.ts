@@ -28,10 +28,8 @@ describe("GET /outages", () => {
     it("should return OK", async () => {
         const response = await request(app).get("/outages")
             .expect(200)
-            .set('Accept', 'application/json');
-        expect(response.headers["content-type"]).toMatch(/json/);
         expect(response.status).toEqual(200);
         // expect(response.body).toEqual(outagesFixtures);
-            
+        expect(response.body.length).toEqual(6);
     })
 });

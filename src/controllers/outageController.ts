@@ -5,7 +5,6 @@ class OutageController{
     async getOutages(client:ApiClient):Promise<SiteOutage[]>{
         
         const result = await client.getOutages();
-        console.log("results" + result);
         return result;
     }
 }

@@ -1,5 +1,7 @@
 import request from "supertest"
 import app from "../src/app"
+import { readFileSync } from "fs"
+
 
 
 describe("GET /", () => {
@@ -10,14 +12,20 @@ describe("GET /", () => {
 });
 
 describe("GET /outages", () => {
-    it("should return OK", () => {
-        return request(app).get("/outages")
+
+    let outagesFixture: [any];
+    beforeAll(() => {
+        outagesFixture = JSON.parse(readFileSync("./test/fixtures/siteOutages.json", "utf-8"));
+    })
+
+    it("should return OK", async () => {
+        const response = await request(app).get("/outages")
             .expect(200)
-            .then((response)=>{
-                expect(response).toBeTruthy()
-            })
-            .catch((err)=>{
-                expect(err).toBeFalsy()
-            });
+            .set('Accept', 'application/json');
+        console.log(response);
+        expect(response.headers["content-type"]).toMatch(/json/);
+        expect(response.status).toEqual(200);
+        expect(response.body).toEqual(outagesFixture);
+            
     })
 });

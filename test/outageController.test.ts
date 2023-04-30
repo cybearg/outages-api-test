@@ -3,14 +3,16 @@ import { readFileSync } from "fs";
 import SiteOutage from "../src/models/SiteOutage"
 
 describe('getOutages', () => {
-    let outagesFixture: [any];
+    let outagesFixture: SiteOutage[];
     beforeAll(() => {
-        outagesFixture = JSON.parse(readFileSync("./test/fixtures/siteOutages.json", "utf-8"));
+        const json:any = JSON.parse(readFileSync("./test/fixtures/siteOutages.json", "utf-8"));
+        outagesFixture = json.map(item => new SiteOutage(item.id, item.begin, item.string));
     })
 
-    test("returns array of site outages", () => {
+    it.only("returns array of site outages", () => {
         const controller:OutageController = new OutageController();
         const result:SiteOutage[] = controller.getOutages();
+        expect (result).toEqual(outagesFixture);
     })
 })
 

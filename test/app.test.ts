@@ -22,7 +22,6 @@ describe("GET /outages", () => {
         const response = await request(app).get("/outages")
             .expect(200)
             .set('Accept', 'application/json');
-        console.log(response);
         expect(response.headers["content-type"]).toMatch(/json/);
         expect(response.status).toEqual(200);
         // expect(response.body).toEqual(outagesFixture);

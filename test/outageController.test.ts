@@ -1,9 +1,16 @@
-import OutageController from "../src/controllers/outageController"
+import OutageController from "../src/controllers/outageController";
+import { readFileSync } from "fs";
+import SiteOutage from "../src/models/SiteOutage"
 
 describe('getOutages', () => {
-    test("is called", () => {
+    let outagesFixture: [any];
+    beforeAll(() => {
+        outagesFixture = JSON.parse(readFileSync("./test/fixtures/siteOutages.json", "utf-8"));
+    })
+
+    test("returns array of site outages", () => {
         const controller:OutageController = new OutageController();
-        expect(controller.getOutages).not.toThrow();
+        const result:SiteOutage[] = controller.getOutages();
     })
 })
 

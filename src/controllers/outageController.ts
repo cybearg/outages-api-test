@@ -1,6 +1,8 @@
-class OutageController{
-    getOutages(){
+import SiteOutage from "src/models/SiteOutage";
 
+class OutageController{
+    getOutages():SiteOutage[]{
+        return [];
     }
 }
 

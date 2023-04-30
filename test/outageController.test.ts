@@ -8,15 +8,15 @@ describe('getOutages', () => {
     let testApiClient:TestApiClient;
     let outagesFixtures:SiteOutage[];
     
-    beforeAll(() => {
+    beforeAll(async () => {
         testApiClient = new TestApiClient();
-        outagesFixtures = testApiClient.getOutages();
+        outagesFixtures = await testApiClient.getOutages();
     })
 
-    it.only("returns array of site outages", () => {
+    it.only("returns array of site outages", async () => {
         const controller:OutageController = new OutageController();
-        
-        const result:SiteOutage[] = controller.getOutages(testApiClient);
+
+        const result:SiteOutage[] = await controller.getOutages(testApiClient);
         expect (result).toEqual(outagesFixtures);
     })
 })

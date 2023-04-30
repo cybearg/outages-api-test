@@ -2,8 +2,8 @@ import SiteOutage from "src/models/SiteOutage";
 import ApiClient from "src/models/ApiClient";
 
 class OutageController{
-    getOutages(client:ApiClient):SiteOutage[]{
-        return client.getOutages();
+    async getOutages(client:ApiClient):Promise<SiteOutage[]>{
+        return await client.getOutages();
     }
 }
 

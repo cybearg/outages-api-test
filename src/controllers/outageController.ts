@@ -15,7 +15,7 @@ class OutageController{
         return result;
     }
 
-    async postSiteOutages(siteId:string, client:ApiClient, date?:Date){
+    async postSiteOutages(siteId:string, client:ApiClient, date:Date){
         
         const siteInfo:SiteInfo|null = await client.getSiteInfo(siteId);
         const outages:SiteOutage[] = await client.getOutages();

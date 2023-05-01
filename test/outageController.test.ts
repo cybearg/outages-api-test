@@ -62,9 +62,11 @@ describe("postSiteOutages", () => {
     })
 
     it("posts site outages for site id", async() => {
+        const filterBydate = new Date('2022-01-01T00:00:00.000Z');
+        const result = await controller.postSiteOutages(siteId,testApiClient,filterBydate);
         
-        const result = await controller.postSiteOutages(siteId,testApiClient);
-        expect(testApiClient.postOutages).toHaveBeenCalled();
+        const filteredOutages = outagesFixtures.filter((o:SiteOutage) => o.begin > filterBydate);
+        expect(testApiClient.postOutages).toHaveBeenCalledWith(filteredOutages);
     });
 })
 

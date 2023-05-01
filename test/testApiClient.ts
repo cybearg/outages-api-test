@@ -17,12 +17,16 @@ class TestApiClient implements ApiClient {
     async getSiteInfo(siteId:string):Promise<SiteInfo|null>{
         if(siteId != 'kingfisher')
             return null;
-            
+
         const item = JSON.parse(readFileSync("./test/fixtures/siteInfo.json", "utf-8"));
         const siteInfo = new SiteInfo(item.id, item.name);
         siteInfo.devices = item.devices.map(d => new DeviceInfo(item.id, item.name));
            
         return Promise.resolve(siteInfo);
+    }
+
+    async postOutages(outages:SiteOutage[]){
+        return;
     }
 }
 

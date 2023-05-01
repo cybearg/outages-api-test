@@ -3,5 +3,6 @@ import type SiteInfo from "./SiteInfo"
 
 export default interface ApiClient{
     getOutages():Promise<SiteOutage[]>
-    getSiteInfo(sideId:string):Promise<SiteInfo|null>
+    getSiteInfo(siteId:string):Promise<SiteInfo|null>
+    postOutages(outages:SiteOutage[])
 }

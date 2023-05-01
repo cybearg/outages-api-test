@@ -48,6 +48,12 @@ class HttpClient implements ApiClient {
         }
         return null;
     }
+
+    postOutages(outages:SiteOutage[]) {
+        throw new Error("Method not implemented.");
+    }
+
+
 }
 
 export default HttpClient;

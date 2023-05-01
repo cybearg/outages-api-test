@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios, { AxiosResponse } from "axios"
 
 import ApiClient from "../models/ApiClient";
 import SiteOutage from "../models/SiteOutage";
@@ -54,7 +54,7 @@ class HttpClient implements ApiClient {
         const postData = JSON.stringify(outages);
         console.log(postData);
         try {
-                await axios.post(
+                const response:AxiosResponse = await axios.post(
                 endpoint,
                 postData,
                 {
@@ -64,12 +64,11 @@ class HttpClient implements ApiClient {
                         'x-api-key': process.env.API_KEY
                     }
                 });
+                return response.data;
         } catch (error: any) {
             console.log("postOutages error", error.toJSON());
         }
     }
-
-
 }
 
 export default HttpClient;

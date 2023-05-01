@@ -22,12 +22,12 @@ class OutageController {
             return;
 
         const allOutages: SiteOutage[] = await client.getOutages();
-        const outages: SiteOutage[] = allOutages.filter((o: SiteOutage) => o.begin > filterByDate && siteInfo.hasDevice(o.id));
+        const outages: SiteOutage[] = allOutages.filter((o: SiteOutage) => o.begin >= filterByDate && siteInfo.hasDevice(o.id));
 
         outages.forEach((o: SiteOutage) =>
             o.name = siteInfo.devices[o.id].name
         );
-        await client.postOutages(siteId, outages);
+        return await client.postOutages(siteId, outages);
     }
 }
 

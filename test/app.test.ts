@@ -47,3 +47,18 @@ describe("GET /site-info/{siteId}", () => {
         expect(response.body).toEqual(expected);
     })
 });
+
+describe("POST /site-outages/{siteId}", () => {
+
+    const testApiClient:TestApiClient = new TestApiClient();
+    testApiClient.postOutages = jest.fn();
+
+    it("should return OK", async () => {
+        const siteId = 'kingfisher';
+
+        const response = await request(app).get(`/site-outages/${siteId}`);
+        expect(response.status).toEqual(200);
+        // expect(response.body).toEqual(outagesFixtures);
+        expect(testApiClient.postOutages).toHaveBeenCalledTimes(1);
+    })
+});

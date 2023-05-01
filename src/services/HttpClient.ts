@@ -31,7 +31,7 @@ class HttpClient implements ApiClient {
     async getSiteInfo(siteId: string): Promise<SiteInfo | null> {
         const endpoint = `${process.env.API_ENDPOINT}/site-info/${siteId}`;
         try {
-            const { data } = await axios.get(
+            const { data } = await axios.post(
                 endpoint,
                 {
                     headers: {
@@ -49,8 +49,23 @@ class HttpClient implements ApiClient {
         return null;
     }
 
-    postOutages(outages: SiteOutage[]) {
-        throw new Error("Method not implemented.");
+    async postOutages(siteId:string, outages: SiteOutage[]) {
+        const endpoint = `${process.env.API_ENDPOINT}/site-outages/${siteId}`;
+        const postData = JSON.stringify(outages);
+        try {
+                await axios.post(
+                endpoint,
+                postData,
+                {
+                    headers: {
+                        'accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'x-api-key': process.env.API_KEY
+                    }
+                });
+        } catch (error: any) {
+            console.log("http client error", error.toJSON());
+        }
     }
 
 

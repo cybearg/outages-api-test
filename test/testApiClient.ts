@@ -25,7 +25,7 @@ class TestApiClient implements ApiClient {
         return Promise.resolve(siteInfo);
     }
 
-    async postOutages(outages: SiteOutage[]) {
+    async postOutages(siteId:string, outages: SiteOutage[]) {
         return;
     }
 

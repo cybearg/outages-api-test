@@ -66,7 +66,7 @@ describe("postSiteOutages", () => {
         const expectedOutages = testApiClient.getExpectedOutages();
         const result = await controller.postSiteOutages(siteId,testApiClient,filterBydate);
 
-        expect(testApiClient.postOutages).toHaveBeenCalledWith(expectedOutages);
+        expect(testApiClient.postOutages).toHaveBeenCalledWith("kingfisher", expectedOutages);
     });
 })
 

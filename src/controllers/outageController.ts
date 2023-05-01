@@ -27,7 +27,7 @@ class OutageController {
         outages.forEach((o: SiteOutage) =>
             o.name = siteInfo.devices[o.id].name
         );
-        await client.postOutages(outages);
+        await client.postOutages(siteId, outages);
     }
 }
 

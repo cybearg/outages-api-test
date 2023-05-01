@@ -48,25 +48,25 @@ describe("getSiteInfo", ()=> {
 })
 
 describe("postSiteOutages", () => {
+    const controller:OutageController = new OutageController();
     const testApiClient:TestApiClient = new TestApiClient();
     testApiClient.postOutages = jest.fn();
 
     let siteInfoFixtures:SiteInfo|null;
     let outagesFixtures:SiteOutage[];
-    const controller:OutageController = new OutageController();
     const siteId ='kingfisher';
 
     beforeAll(async () => {
         siteInfoFixtures = await testApiClient.getSiteInfo('kingfisher');
-        outagesFixtures = outagesFixtures = await testApiClient.getOutages();
+        outagesFixtures = await testApiClient.getOutages();
     })
 
     it("posts site outages for site id", async() => {
         const filterBydate = new Date('2022-01-01T00:00:00.000Z');
+        const expectedOutages = testApiClient.getExpectedOutages();
         const result = await controller.postSiteOutages(siteId,testApiClient,filterBydate);
-        
-        const filteredOutages = outagesFixtures.filter((o:SiteOutage) => o.begin > filterBydate);
-        expect(testApiClient.postOutages).toHaveBeenCalledWith(filteredOutages);
+
+        expect(testApiClient.postOutages).toHaveBeenCalledWith(expectedOutages);
     });
 })
 

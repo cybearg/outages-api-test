@@ -41,7 +41,7 @@ class HttpClient implements ApiClient {
                 });
 
             const siteInfo = new SiteInfo(data.id, data.name);
-            siteInfo.devices = data.devices.map(d => new DeviceInfo(d.id, d.name));
+            siteInfo.devices = data.devices.map((d:DeviceInfo) => new DeviceInfo(d.id, d.name));
             return siteInfo;
         } catch (error: any) {
             console.log("http client error", error.toJSON());

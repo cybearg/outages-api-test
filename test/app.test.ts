@@ -56,9 +56,8 @@ describe("POST /site-outages/{siteId}", () => {
     it("should return OK", async () => {
         const siteId = 'kingfisher';
 
-        const response = await request(app).get(`/site-outages/${siteId}`);
+        const response = await request(app).get(`/update-outages/${siteId}`);
         expect(response.status).toEqual(200);
-        // expect(response.body).toEqual(outagesFixtures);
         expect(testApiClient.postOutages).toHaveBeenCalledTimes(1);
     })
 });

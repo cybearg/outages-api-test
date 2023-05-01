@@ -23,7 +23,7 @@ class HttpClient implements ApiClient {
             );
             return outages;
         } catch (error: any) {
-            console.log("http client error", error.toJSON());
+            console.log("getOutages error", error.toJSON());
         }
         return [];
     }
@@ -31,7 +31,7 @@ class HttpClient implements ApiClient {
     async getSiteInfo(siteId: string): Promise<SiteInfo | null> {
         const endpoint = `${process.env.API_ENDPOINT}/site-info/${siteId}`;
         try {
-            const { data } = await axios.post(
+            const { data } = await axios.get(
                 endpoint,
                 {
                     headers: {
@@ -44,7 +44,7 @@ class HttpClient implements ApiClient {
             siteInfo.setDevices(data.devices.map((d: DeviceInfo) => new DeviceInfo(d.id, d.name)));
             return siteInfo;
         } catch (error: any) {
-            console.log("http client error", error.toJSON());
+            console.log("getSiteInfo error", error.toJSON());
         }
         return null;
     }
@@ -52,6 +52,7 @@ class HttpClient implements ApiClient {
     async postOutages(siteId:string, outages: SiteOutage[]) {
         const endpoint = `${process.env.API_ENDPOINT}/site-outages/${siteId}`;
         const postData = JSON.stringify(outages);
+        console.log(postData);
         try {
                 await axios.post(
                 endpoint,
@@ -64,7 +65,7 @@ class HttpClient implements ApiClient {
                     }
                 });
         } catch (error: any) {
-            console.log("http client error", error.toJSON());
+            console.log("postOutages error", error.toJSON());
         }
     }
 

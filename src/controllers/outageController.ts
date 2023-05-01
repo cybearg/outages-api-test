@@ -16,9 +16,9 @@ class OutageController{
     }
 
     async postSiteOutages(siteId:string, client:ApiClient, date:Date){
-        
         const siteInfo:SiteInfo|null = await client.getSiteInfo(siteId);
-        const outages:SiteOutage[] = await client.getOutages();
+        const allOutages:SiteOutage[] = await client.getOutages();
+        const outages:SiteOutage[]  = allOutages.filter( (o:SiteOutage) => o.begin > date);
         await client.postOutages(outages);
     }
 }

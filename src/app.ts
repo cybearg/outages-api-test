@@ -16,4 +16,9 @@ app.get('/outages', async (req: Request, res: Response) => {
   res.json(result);
 });
 
+app.get('/site-info/:siteId', async (req: Request, res: Response) => {
+  const result = await outageController.getSiteInfo(req.params.siteId, getApiClient());
+  res.json(result);
+});
+
 export default app;

@@ -26,10 +26,24 @@ describe("GET /outages", () => {
     })
 
     it("should return OK", async () => {
-        const response = await request(app).get("/outages")
-            .expect(200)
+        const response = await request(app).get("/outages");
         expect(response.status).toEqual(200);
         // expect(response.body).toEqual(outagesFixtures);
         expect(response.body.length).toEqual(6);
+    })
+});
+
+describe("GET /site-info/{siteId}", () => {
+
+    const testApiClient:TestApiClient = new TestApiClient();
+
+    it("should return OK", async () => {
+        const siteInfo = 'kingfisher';
+        const expected = await testApiClient.getSiteInfo(siteInfo);
+
+        const response = await request(app).get(`/site-info/${siteInfo}`);
+        expect(response.status).toEqual(200);
+        // expect(response.body).toEqual(outagesFixtures);
+        expect(response.body).toEqual(expected);
     })
 });

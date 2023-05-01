@@ -9,9 +9,9 @@ class OutageController{
         return result;
     }
 
-    async getSiteInfo(siteId:string, client:ApiClient):Promise<SiteInfo>{
+    async getSiteInfo(siteId:string, client:ApiClient):Promise<SiteInfo|null>{
         
-        const result:SiteInfo = await client.getSiteInfo(siteId);
+        const result:SiteInfo|null = await client.getSiteInfo(siteId);
         return result;
     }
 }

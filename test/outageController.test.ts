@@ -7,7 +7,7 @@ describe('getOutages', () => {
 
     let testApiClient:TestApiClient;
     let outagesFixtures:SiteOutage[];
-    let siteInfoFixtures:SiteInfo;
+    let siteInfoFixtures:SiteInfo|null;
     
     beforeAll(async () => {
         testApiClient = new TestApiClient();
@@ -25,8 +25,15 @@ describe('getOutages', () => {
     it("fetches site info", async () => {
         const controller:OutageController = new OutageController();
 
-        const result:SiteInfo = await controller.getSiteInfo('kingfisher',testApiClient);
+        const result:SiteInfo|null = await controller.getSiteInfo('kingfisher',testApiClient);
         expect (result).toEqual(siteInfoFixtures);
+    })
+
+    it("returns null when site info not found", async () => {
+        const controller:OutageController = new OutageController();
+
+        const result:SiteInfo|null = await controller.getSiteInfo('dasdas',testApiClient);
+        expect (result).toBeNull();
     })
 })
 

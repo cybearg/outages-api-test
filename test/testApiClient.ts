@@ -20,7 +20,7 @@ class TestApiClient implements ApiClient {
 
         const item = JSON.parse(readFileSync("./test/fixtures/siteInfo.json", "utf-8"));
         const siteInfo = new SiteInfo(item.id, item.name);
-        siteInfo.devices = item.devices.map(d => new DeviceInfo(d.id, d.name));
+        siteInfo.setDevices(item.devices.map(d => new DeviceInfo(d.id, d.name)));
 
         return Promise.resolve(siteInfo);
     }

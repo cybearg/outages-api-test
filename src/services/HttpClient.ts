@@ -41,7 +41,7 @@ class HttpClient implements ApiClient {
                 });
 
             const siteInfo = new SiteInfo(data.id, data.name);
-            siteInfo.devices = data.devices.map((d:DeviceInfo) => new DeviceInfo(d.id, d.name));
+            siteInfo.setDevices(data.devices.map((d: DeviceInfo) => new DeviceInfo(d.id, d.name)));
             return siteInfo;
         } catch (error: any) {
             console.log("http client error", error.toJSON());
@@ -49,7 +49,7 @@ class HttpClient implements ApiClient {
         return null;
     }
 
-    postOutages(outages:SiteOutage[]) {
+    postOutages(outages: SiteOutage[]) {
         throw new Error("Method not implemented.");
     }
 

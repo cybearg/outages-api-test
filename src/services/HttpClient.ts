@@ -1,6 +1,7 @@
 import ApiClient from "src/models/ApiClient";
 import SiteOutage from "src/models/SiteOutage";
 import axios from "axios"
+import SiteInfo from "src/models/SiteInfo";
 
 
 class HttpClient implements ApiClient {
@@ -20,6 +21,10 @@ class HttpClient implements ApiClient {
                 console.log("http client error", error.toJSON());
         }
         return [];
+    }
+
+    async getSiteInfo(sideId: string): Promise<SiteInfo> {
+        throw new Error("Not implemented")
     }
 }
 
